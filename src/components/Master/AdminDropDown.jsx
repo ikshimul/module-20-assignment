@@ -5,16 +5,16 @@ import { AiOutlineLogout, AiOutlineUser } from "react-icons/ai";
 import SubmitButton from "@/components/SubmitButton/SubmitButton";
 import { ErrorToast, SuccessToast } from "@/utility/FormHelper";
 
-const UserDropDown = () => {
+const AdminDropDown = () => {
   const [submit, setSubmit] = useState(false);
   const onLogout = async () => {
     setSubmit(true);
-    let res = await fetch("/api/user/login");
+    let res = await fetch("/api/admin/login");
     let ResJson = await res.json();
     setSubmit(false);
     if (ResJson["status"] === "success") {
       SuccessToast("Logout Success");
-      window.location.href = "/";
+      window.location.href = "/admin/login";
     } else {
       ErrorToast("Request Fail");
     }
@@ -54,4 +54,4 @@ const UserDropDown = () => {
   );
 };
 
-export default UserDropDown;
+export default AdminDropDown;

@@ -9,8 +9,8 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import "bootstrap";
-import UserDropDown from "@/components/Master/UserDropDown";
 import { Toaster } from "react-hot-toast";
+import AdminDropDown from "./AdminDropDown";
 const SideLayout = (props) => {
   let contentRef,
     sideNavRef = useRef();
@@ -93,7 +93,7 @@ const SideLayout = (props) => {
               </span>
               <span className="mx-2 f-16">{title}</span>
             </Navbar.Brand>
-            <UserDropDown />
+            <AdminDropDown />
           </div>
         </Navbar>
         <div className="p-3">{props.children}</div>
