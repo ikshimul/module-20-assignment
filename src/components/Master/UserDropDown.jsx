@@ -3,8 +3,22 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { AiOutlineLogout, AiOutlineUser } from "react-icons/ai";
 import SubmitButton from "@/components/SubmitButton/SubmitButton";
+import { ErrorToast, SuccessToast } from "@/utility/FormHelper";
 
 const UserDropDown = () => {
+  const [submit, setSubmit] = useState(false);
+  const onLogout = async () => {
+    setSubmit(true);
+    let res = await fetch("/api/admin/login");
+    let ResJson = await res.json();
+    setSubmit(false);
+    if (ResJson["status"] === "success") {
+      SuccessToast("Logout Success");
+      window.location.href = "/admin/login";
+    } else {
+      ErrorToast("Request Fail");
+    }
+  };
   return (
     <div className="float-right mx-3 h-auto d-flex">
       <div className="user-dropdown">
@@ -24,7 +38,12 @@ const UserDropDown = () => {
             <span className="side-bar-item-caption">Profile</span>
           </Link>
           <div className="m-3">
-            <SubmitButton text="Logout" className="btn  btn-outline-danger">
+            <SubmitButton
+              onClick={onLogout}
+              submit={submit}
+              text="Logout"
+              className="btn  btn-outline-danger"
+            >
               <AiOutlineLogout className="side-bar-item-icon" />
               <span className="side-bar-item-caption">Logout</span>
             </SubmitButton>
