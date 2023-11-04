@@ -7,7 +7,7 @@ import {
   SuccessToast,
 } from "@/utility/FormHelper";
 import SubmitButton from "@/components/SubmitButton/SubmitButton";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const LoginForm = () => {
   let [data, setData] = useState({ email: "", password: "" });
@@ -21,14 +21,11 @@ const LoginForm = () => {
   const formSubmit = async (e) => {
     e.preventDefault();
     if (IsEmail(data.email)) {
-      toast("Here is your toast.");
-      console.log("email error");
       ErrorToast("Valid Email Address Required");
     } else if (IsEmpty(data.email)) {
       ErrorToast("Email Address Required");
     } else {
       setSubmit(true);
-
       const options = {
         method: "POST",
         headers: {
@@ -85,6 +82,7 @@ const LoginForm = () => {
             text="Login"
           />
         </form>
+        <Toaster position="top-right" />
       </div>
     </div>
   );
